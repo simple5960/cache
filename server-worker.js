@@ -8,10 +8,10 @@ let CACHE_URLS = [
 ];
 
 /**
- * »º´æµ½ cacheStorage Àï
+ * test
  *
- * @param {Request} req ÇëÇó¶ÔÏó
- * @param {Response} res ÏìÓ¦¶ÔÏó
+ * @param {Request} req ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * @param {Response} res ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½
  */
 function saveToCache(req, res) {
     return caches
@@ -20,9 +20,9 @@ function saveToCache(req, res) {
 }
 
 /**
- * Ô¤»º´æ
+ * Ô¤ï¿½ï¿½ï¿½ï¿½
  *
- * @return {Promise} »º´æ³É¹¦µÄpromise
+ * @return {Promise} ï¿½ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½promise
  */
 function precache() {
     return caches.open(CACHE_NAME).then(function (cache) {
@@ -31,7 +31,7 @@ function precache() {
 }
 
 /**
- * Çå³ý¹ýÆÚµÄ cache
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ cache
  *
  * @return {Promise} promise
  */
@@ -46,7 +46,7 @@ function clearStaleCache() {
 }
 
 /**
- * ÇëÇó²¢»º´æÄÚÈÝ
+ * ï¿½ï¿½ï¿½ó²¢»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  *
  * @param {Request} req request
  * @return {Promise}
@@ -60,22 +60,22 @@ function fetchAndCache(req) {
 }
 
 
-// ÏÂÔØÐÂµÄ»º´æ
+// ï¿½ï¿½ï¿½ï¿½ï¿½ÂµÄ»ï¿½ï¿½ï¿½
 self.addEventListener('install', function (event) {
     event.waitUntil(
-        // Èç¹ûÓÐ°æ±¾¸üÐÂ,Ìø¹ýÔËÐÐ¾É°æ±¾,Ö±½Ó¼¤»îÐÂ°æ±¾sw
+        // ï¿½ï¿½ï¿½ï¿½Ð°æ±¾ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¾É°æ±¾,Ö±ï¿½Ó¼ï¿½ï¿½ï¿½ï¿½Â°æ±¾sw
         precache().then(self.skipWaiting)
     );
 });
 
-// É¾³ý¾ÉµÄ»º´æ
+// É¾ï¿½ï¿½ï¿½ÉµÄ»ï¿½ï¿½ï¿½
 self.addEventListener('activate', function (event) {
     event.waitUntil(
         Promise.all([
-            /*Clients ½Ó¿ÚµÄ  claim() ·½·¨ÔÊÐíÒ»¸ö¼¤»îµÄ service worker 
-            ½«×Ô¼ºÉèÖÃÎªÆä scope (en-US) ÄÚËùÓÐclients µÄcontroller . 
-            Õâ»áÔÚÓÉ´Ëservice worker ¿ØÖÆµÄÈÎºÎ clients ÖÐ´¥·¢ navigator.serviceWorker  ÉÏµÄ  "controllerchange"  ÊÂ¼þ.*/
-            //¶áÈ¡¾É°æ±¾sw.jsµÄ¿ØÖÆÈ¨
+            /*Clients ï¿½Ó¿Úµï¿½  claim() ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ service worker 
+            ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ scope (en-US) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½clients ï¿½ï¿½controller . 
+            ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É´ï¿½service worker ï¿½ï¿½ï¿½Æµï¿½ï¿½Îºï¿½ clients ï¿½Ð´ï¿½ï¿½ï¿½ navigator.serviceWorker  ï¿½Ïµï¿½  "controllerchange"  ï¿½Â¼ï¿½.*/
+            //ï¿½ï¿½È¡ï¿½É°æ±¾sw.jsï¿½Ä¿ï¿½ï¿½ï¿½È¨
             self.clients.claim(),
             clearStaleCache()
         ])
